@@ -1,59 +1,15 @@
-# compiler-code
-#include <stdio.h> 
-#include <string.h> 
-#include <ctype.h> 
- 
-// Function to check if the string is a C keyword 
-int isKeyword(char *str) { 
-    char *keywords[] = { 
-        "auto", "break", "case", "char", "const", "continue", "default", 
-        "do", "double", "else", "enum", "extern", "float", "for", "goto", 
-        "if", "int", "long", "register", "return", "short", "signed", 
-        "sizeof", "static", "struct", "switch", "typedef", "union", 
-        "unsigned", "void", "volatile", "while"  }; 
-    int i, num_keywords = 32; 
-    for (i = 0; i < num_keywords; i++) { 
-        if (strcmp(str, keywords[i]) == 0) { 
-            return 1;     }    } 
-    return 0;} 
-// Function to check if the identifier is valid 
-int isValidIdentifier(char *str) { 
-    int i; 
-     
-    // Check if string is empty 
-    if (strlen(str) == 0) { 
-        return 0; 
-    } 
-     
-    // Check if first character is a letter or underscore 
-    if (!isalpha(str[0]) && str[0] != '_') { 
-        return 0; 
-    } 
-     
-    // Check remaining characters 
-    for (i = 1; i < strlen(str); i++) { 
-        if (!isalnum(str[i]) && str[i] != '_') { 
-            return 0; 
-        } 
-    } 
-     
-    // Check if the string is a keyword 
-    if (isKeyword(str)) { 
-        return 0; 
-    } 
-     
-    return 1; 
-} 
- 
-int main() { 
-    char identifier[50]; 
-    printf("Enter an identifier: "); 
-    scanf("%s", identifier); 
-     
-    if (isValidIdentifier(identifier)) { 
-        printf("%s is a valid identifier.\n", identifier); 
-    } else { 
-        printf("%s is not a valid identifier.\n", identifier); 
-    } 
-    return 0; 
-} 
+The program follows a systematic sequence of checks: 
+1. Input: Receive a string (identifier) from the user. 
+2. Empty Check: Verify that the string length is greater than zero. 
+3. First Character Rule: * Check if the first character is an alphabetic letter (a-z, A-Z) or an 
+underscore (_). 
+o If it is a digit or a special character, the identifier is invalid. 
+4. Subsequent Character Rule: * Iterate through the remaining characters of the string. 
+o Each character must be alphanumeric (letter or digit) or an underscore. 
+o If any special character (e.g., @, #, $) or space is found, the identifier is invalid. 
+5. Keyword Restriction: 
+o Compare the input string against a pre-defined list of 32 reserved C keywords 
+(e.g., int, while, return). 
+o If the string matches any keyword, the identifier is invalid. 
+6. Output: If all conditions are satisfied, the string is marked as valid. Otherwise, it is 
+marked as invalid.
